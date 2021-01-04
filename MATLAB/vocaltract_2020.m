@@ -38,13 +38,13 @@ saveFile = true;
 graphs = false;
 
 % Add a plositve "b" sound | true or false
-plosive = false;
+plosive = true;
 
 % Position to start plosive 0.0 = start| 0.5 = middle | 1 = end
-PlosivePosition = 0.00;
+PlosivePosition = 0.0;
 
 % Excitation Type | "LF" "LFVib" "Noise"
-Excitation = "BrownNoise";
+Excitation = "LF";
 
 % Select which vowel/dipthong to use:
 %
@@ -58,7 +58,7 @@ Excitation = "BrownNoise";
 % U     | foot/put
 % V     | but
 
-firstVowelString =  "a";
+firstVowelString =  "bird";
 
 % if using two vowels for a dipthong set to true and select the second
 % vowel
@@ -199,6 +199,7 @@ for n=1:nSamples
     % last section to get the output
     Pout(n) = u_delay(44) + l_delay(44);
 end
+
 
 Pout = Pout/(max(abs(Pout)));     % Normalise output
 

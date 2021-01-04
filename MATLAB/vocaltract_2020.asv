@@ -33,33 +33,36 @@ V = AreaFile.AreaFile.V;           % but
 % enable saving output to disk | true or false
 saveFile = true;
 
+% enable displaying graphs | true or false
+graphs = true;
+
 % Add a plositve "b" sound | true or false
-plosive = true;
+plosive = false;
 
 % Position to start plosive 0.0 = start| 0.5 = middle | 1 = end
 PlosivePosition = 0.0;
 
 % Excitation Type | "LF" "LFVib" "Noise"
-Excitation = "Noise";
+Excitation = "LF";
 
 % Select which vowel/dipthong to use:
 %
 % a     | bart/father
 % ae    | bat/lad
 % bird  | (3) bird
-% I     | beet/see
+% I     | (i) beet/see
 % O     | ball/law
 % Q     | bod/not
 % u     | food/soon
 % U     | foot/put
 % V     | but
 
-firstVowelString =  "bird";
+firstVowelString =  "u";
 
 % if using two vowels for a dipthong set to true and select the second
 % vowel
-dipthong = true;
-secondVowelString = "V";
+dipthong = false;
+secondVowelString = "U";
 
 %------------------- MAIN PROGRAM ------------
 
@@ -177,23 +180,24 @@ end
 Pout = Pout/(max(abs(Pout)));     % Normalise output
 
 % ---- Plot Graphs -----
+if graphs
+    figure(1);
+    clf;
+    plot(Pout);
+    xlabel('time (samples)');
+    ylabel('Amplitude');
 
-figure(1);
-clf;
-plot(Pout);
-xlabel('time (samples)');
-ylabel('Amplitude');
+    fftSize = 2^16;
+    f = (0:fftSize-1)*(Fs/fftSize);
 
-fftSize = 2^16;
-f = (0:fftSize-1)*(Fs/fftSize);
-
-figure(2);
-clf;
-plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));
-axis([0 5000 -100 0]);
-grid on;
-xlabel('Frequency (Hz)');
-ylabel('Magnitude Response (dB)');
+    figure(2);
+    clf;
+    plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));
+    axis([0 5000 -100 0]);
+    grid on;
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude Response (dB)');
+end
 
 % --- Play and Write Audio ---
 soundsc(Pout, Fs);

@@ -11,11 +11,13 @@
 </head>
 
 <body>
+    <!-- Page Title -->
     <div class="container">
         <h1 class="text-center pt-4"> Kelly Lochbaum Vocal Tract - 1D</h1>
+        <hr>
     </div>
+    <!-- Main Content-->
     <div class="container">
-
         <div class="row" id="introduction">
             <h4>Introduction and Background</h4>
 
@@ -24,18 +26,20 @@
                     Voice synthesis is different from other types of synthesis, the voice is a very rich and expressive
                     sound source, so this adds more challenges. Due to the rich variety of the voice, there are numerous
                     ways to synthesise the voice, most models start by looking at the vocal tract as a 17cm tube with
-                    the lips and mouth at one end and the glottis at the other.
+                    the lips and mouth at one end and the glottis at the other <i>(Figure 1)</i>.
                 </p>
                 <p>
                     The vocal tract can be represented using the source-filter model where be glottis is the source, and
-                    the larynx and lips are the filters changing the way the sound it produced. Using the Kelly-Lochbaum
-                    vocal tract model we can model the vocal tract as a series of standard digital waveguides. This idea
-                    was used in collaboration with Max Matthews in the first synthesis of singing voice on an IBM
-                    computer. The video below is the result.
+                    the larynx and lips are the filters changing the way the sound is produced. Using the Kelly-Lochbaum
+                    vocal tract model we can split it up into multiple sections, each section has a specific area which
+                    changes relating on the vowel being produced <i>(Figure 2)</i>. We can then model the vocal tract as
+                    a
+                    series of standard digital waveguides. This idea was used in collaboration with Max Matthews in the
+                    first synthesis of singing voice on an IBM computer. The video below is the result <i>(Video 1)</i>.
                 </p>
-
-                <div class="row">
-                    <div class="col-5">
+                <!-- Video and Figures-->
+                <div class="row my-auto justify-content-center">
+                    <div class="col-6">
                         <div class="card">
                             <div class="ratio ratio-16x9">
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/yIwhx3NQSLg"
@@ -44,102 +48,401 @@
                                     allowfullscreen title="sorry for the daisy daisy video"></iframe>
                             </div>
                             <div class="card-body">
-                                <p class="card-text"> First computer synthesis of Daisy Daisy
-                                </p>
+                                <i class="card-text"> Video 1 - First computer synthesis of Daisy Daisy
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <img src="./assets/img/vocalTract.png" class="img-fluid" alt="Vocal Tract">
+                            <div class="card-body">
+                                <i class="card-text"> Figure 1 Vocal Tract [1]
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 py-3">
+                        <div class="card">
+                            <img src="./assets/img/VocalTractArea.png" class="img-fluid" alt="Vocal Tract Area">
+                            <div class="card-body">
+                                <i class="card-text"> Figure 2 Area of Vocal Tract, from the Glottis end [2]
+                                </i>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <p>
                     more
                 </p>
             </div>
         </div>
-
         <hr>
-
         <div class="row" id="CodeDesign">
             <div class="col">
                 <h4>Code Design</h4>
-                The code implmented for the system is
+                <p>
+                    The code is based on the digital waveguide vocal model and the work done in Labs. The code
+                    produces dipthongs, monothongs, plosives as well as allowing the use of noise, LF and LF with
+                    Vibrato as the excitation. Plosives can be inserted at any pint during the vowel production, and
+                    dipthongs can be produced between any two monothongs. This can produce some dipthongs that would
+                    not naturally be produced by the human voice. The table below highlights all the monothongs
+                    (vowels) the system can produce, the other table highlights dipthongs the system can produce
+                    with the two variables needed to make it sound. Clicking on the IPA representation will link to
+                    the examples further down the page.
+                </p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">IPA</th>
-                            <th scope="col">Code Variable</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">&#593;</th>
-                            <td>a</td>
-                            <td>bart/father</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">&aelig;</th>
-                            <td>ae</td>
-                            <td>bat/lad</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">&epsilon;</th>
-                            <td>bird</td>
-                            <td>bird</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">i</th>
-                            <td>I</td>
-                            <td>beet/see</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">o</th>
-                            <td>O</td>
-                            <td>ball/law</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">&#629;</th>
-                            <td>Q</td>
-                            <td>bod/not</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">u</th>
-                            <td>u</td>
-                            <td>food/soon</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">&#650;</th>
-                            </th>
-                            <td>U</td>
-                            <td>foot/put</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">&#652;</th>
-                            <td>V</td>
-                            <td>but</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">IPA</th>
+                                <th scope="col">Code Variable</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> <a href="#">a:</a></th>
+                                <td>a</td>
+                                <td>bart/father</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&aelig;:</th>
+                                <td>ae</td>
+                                <td>bat/lad</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&epsilon;</th>
+                                <td>bird</td>
+                                <td>bird</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&#618;
+                                </th>
+                                <td>&#618;
+                                </td>
+                                <td>beet/see</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">o</th>
+                                <td>O</td>
+                                <td>ball/law</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&#629;</th>
+                                <td>Q</td>
+                                <td>bod/not</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">u</th>
+                                <td>u</td>
+                                <td>food/soon</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&#650;</th>
+                                </th>
+                                <td>U</td>
+                                <td>foot/put</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&#652;</th>
+                                <td>V</td>
+                                <td>but</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Dipthongs Examples -->
 
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">IPA</th>
+                                <th scope="col">First Vowel</th>
+                                <th scope="col">Second Vowel</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> <a href="#">a&#650;:</a></th>
+                                <td>a</td>
+                                <td>U</td>
+                                <td>now/cow</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">a&#618; :</th>
+                                <td>ae</td>
+                                <td>&#618;
+                                </td>
+                                <td>high</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">&epsilon;&#618;
+                                </th>
+                                <td>bird</td>
+                                <td>&#618;
+                                </td>
+                                <td>day</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">o&#618;
+                                </th>
+                                <td>o</td>
+                                <td>&#618;
+                                </td>
+                                <td>boy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <hr>
+                <h4>Development</h4>
+                <p>
+                    When developing the model, the place to start would be looking at the excitement of the system. The
+                    system allows Liljencrants-Fant (LF) glottal flow model to synthesise the voice, the system reads in
+                    the two LF inputs, one with vibrato and one without, provided in the lab and uses it as excitement
+                    for the system. In addition to the LF inputs, the system allows 1 second of noise to be used as an
+                    excitement, below are the experiments with different types of noise, unit impulse and LFs. The
+                    phomeme being synthesised is <b>a</b>.
+                </p>
+                <div class="row">
+                    <div class="table-responsive col-6">
+                        <table class="table table-bordered align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Excitement Type</th>
+                                    <th scope="col">Audio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Unit Impulse</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_unitImpulse_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                </tr>
+                                <tr>
+                                    <td>LF</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                </tr>
+                                <tr>
+                                    <td>LF with Vibrato</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                </tr>
+                                <tr>
+                                    <td>White Noise</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_WhiteNoise_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Pink Noise</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_PinkNoise_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                </tr>
+                                <tr>
+                                    <td>Brown Noise</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_BrownNoise_a.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    After completing the lab and implementing the different excitement types, the next stage was to
+                    focus on was creating plosives. Plosives are as as simple as stopping the sound midway through
+                    creating it. The code works by creating an envelope that goes from 0 to 1 over 1/8th of the total
+                    samples. This envelope can then be inserted at any point during the system with ones filling in the
+                    remaining space. The mouth end is then updated with the value of the envelope multiplied by the
+                    segment diameter.
+                </p>
+                <pre><code>
+                        % Plosive
+                        plosiveDuration = round(nSamples/8);
+                        plosiveEnv = linspace(0,1,plosiveDuration);
+                        plosiveBefore = ones(1,(PlosiveStartPosition));
+                        plosiveAfter = ones(1,(nSamples-PlosiveStartPosition-plosiveDuration));
+                        plosiveLine = [plosiveBefore plosiveEnv plosiveAfter];
+                        ...
+
+                        ...
+                        if plosive
+                            plo = plosiveLine(n);
+                            A(44) = plo*A(44);
+                        end
+                        </code></pre>
+                <p>The table has audio examples of plosives at different positions, the excitation type was “LF” and the
+                    vowel synthesised was &epsilon; (bird).</p>
+                <div class="table-responsive col-6">
+
+                    <table class="table table-bordered align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Plosive Position</th>
+                                <th scope="col">Audio</th>
+                                <th scope="col">Output Graph</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0.00</td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td>
+                                    <img src="./assets/img/plosive-0-LF-bird.bmp" class="img-fluid"
+                                        alt="Graph of plosive at time 0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>0.25</td>
+                                <td><audio controls>
+                                        <source
+                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-2.500000e-01.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td>
+                                    <img src="./assets/img/plosive-025-LF-bird.bmp" class="img-fluid"
+                                        alt="Graph of plosive at time 0.25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>0.50</td>
+                                <td><audio controls>
+                                        <source
+                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-5.000000e-01.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td>
+                                    <img src="./assets/img/plosive-05-LF-bird.bmp" class="img-fluid"
+                                        alt="Graph of plosive at time 0.5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>0.75</td>
+                                <td><audio controls>
+                                        <source
+                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-7.500000e-01.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td>
+                                    <img src="./assets/img/plosive-075-LF-bird.bmp" class="img-fluid"
+                                        alt="Graph of plosive at time 0.75">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1.00</td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-1.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td>
+                                    <img src="./assets/img/plosive-1-LF-bird.bmp" class="img-fluid"
+                                        alt="Graph of plosive at time 1">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Dipthongs
+                </p>
+            </div>
+
+
+        </div>
         <hr>
+        <div class="row">
+            <div class="col">
+                <h4>Audio Examples</h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h4>Anaylsis</h4>
+                <div class="row">
+                    <h5>Formant Anaylsis in Praat</h5>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h4>Evaluation and Further Development</h4>
+                <p>
 
+                </p>
+                <h6>Word Count : 602</h6>
+            </div>
+        </div>
+        <hr>
         <div class="row">
             <div class="col">
                 <h4> References</h4>
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li>
+                            [1] Loy, G., & Chowning, J. (2007). Sound Synthesis. In Musimathics, Volume 2: The
+                            Mathematical Foundations of Music (pp. 363-452). Cambridge, Massachusetts; London,
+                            England:
+                            The MIT Press. doi:10.2307/j.ctt5hhm8g.14
+                        </li>
+                        <li>
+                            [2] B. Story and I. Titze, "Parameterization of vocal tract area functions by empirical
+                            orthogonal modes", Journal of Phonetics, vol. 26, no. 3, pp. 223-260, 1998. Available:
+                            10.1006/jpho.1998.0076
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-
-
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
+
+
+    <footer class="text-center footer">
+        Copyright &copy; 2021 | All Rights Reserved
+    </footer>
 </body>
 
 </html>

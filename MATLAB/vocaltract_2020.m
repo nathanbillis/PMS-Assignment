@@ -11,7 +11,8 @@
 % 223-260, https://doi.org/10.1006/jpho.1998.0076.
 %
 % Adapted by DTM for LF excitation, Sound Output, Dynamics, Oct 2020
-% Adapted by NCAB for fufliment of Physical Modelling Synthesis, Dec 2020
+% Adapted by INSERTNAME 
+% for fufliment of Physical Modelling Synthesis, Dec 2020
 % -----------------------------------------------------------------------
 
 % --------------------------- Initial Setup -----------------------------
@@ -33,33 +34,45 @@ V = AreaFile.AreaFile.V;           % but
 % enable saving output to disk | true or false
 saveFile = true;
 
+% enable displaying graphs | true or false
+graphs = false;
+
 % Add a plositve "b" sound | true or false
-plosive = true;
+plosive = false;
 
 % Position to start plosive 0.0 = start| 0.5 = middle | 1 = end
-PlosivePosition = 0.0;
+PlosivePosition = 0.00;
 
 % Excitation Type | "LF" "LFVib" "Noise"
-Excitation = "LFVib";
+Excitation = "BrownNoise";
 
 % Select which vowel/dipthong to use:
 %
 % a     | bart/father
 % ae    | bat/lad
 % bird  | (3) bird
-% I     | beet/see
+% I     | (i) beet/see
 % O     | ball/law
 % Q     | bod/not
 % u     | food/soon
 % U     | foot/put
 % V     | but
 
-firstVowelString =  "bird";
+firstVowelString =  "a";
 
 % if using two vowels for a dipthong set to true and select the second
 % vowel
-dipthong = true;
-secondVowelString = "V";
+% EXAMPLES
+% ===========================
+% 1Vowel|2Vowel | Description
+% a     | U     | now
+% bird  | I     | day
+% a     | I     | high
+% O     | I     | boy
+% ===========================
+
+dipthong = false; % true or false
+secondVowelString = "I";
 
 %------------------- MAIN PROGRAM ------------
 
@@ -93,8 +106,22 @@ if Excitation == "LF"
 end
 
 % 1s of Noise
-if Excitation == "Noise"
+if Excitation == "WhiteNoise"
+    cn = dsp.ColoredNoise('Color','White','SamplesPerFrame',44100);
+    noise = cn();
+    uin = noise;
+end
+
+% 1s of Pink Noise
+if Excitation == "PinkNoise" || Excitation == "Noise"
     cn = dsp.ColoredNoise('Color','Pink','SamplesPerFrame',44100);
+    noise = cn();
+    uin = noise;
+end
+
+% 1s of Brown Noise
+if Excitation == "BrownNoise"
+    cn = dsp.ColoredNoise('Color','Brown','SamplesPerFrame',44100);
     noise = cn();
     uin = noise;
 end
@@ -121,10 +148,9 @@ transition2 = 1 - transition;
 % Plosive
 plosiveDuration = round(nSamples/8);
 plosiveEnv = linspace(0,1,plosiveDuration);
-PlosiveBefore = ones(1,(PlosiveStartPosition));
-PlosiveAfter = ones(1,(nSamples-PlosiveStartPosition-plosiveDuration));
-plosiveLine = [PlosiveBefore plosiveEnv PlosiveAfter];
-
+plosiveBefore = ones(1,(PlosiveStartPosition));
+plosiveAfter = ones(1,(nSamples-PlosiveStartPosition-plosiveDuration));
+plosiveLine = [plosiveBefore plosiveEnv plosiveAfter];
 
 %------ System Update Equations --------
 for n=1:nSamples
@@ -177,23 +203,24 @@ end
 Pout = Pout/(max(abs(Pout)));     % Normalise output
 
 % ---- Plot Graphs -----
+if graphs
+    figure(1);
+    clf;
+    plot(Pout);
+    xlabel('time (samples)');
+    ylabel('Amplitude');
 
-figure(1);
-clf;
-plot(Pout);
-xlabel('time (samples)');
-ylabel('Amplitude');
+    fftSize = 2^16;
+    f = (0:fftSize-1)*(Fs/fftSize);
 
-fftSize = 2^16;
-f = (0:fftSize-1)*(Fs/fftSize);
-
-figure(2);
-clf;
-plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));
-axis([0 5000 -100 0]);
-grid on;
-xlabel('Frequency (Hz)');
-ylabel('Magnitude Response (dB)');
+    figure(2);
+    clf;
+    plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));
+    axis([0 5000 -100 0]);
+    grid on;
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude Response (dB)');
+end
 
 % --- Play and Write Audio ---
 soundsc(Pout, Fs);
@@ -204,7 +231,7 @@ if saveFile
     elseif dipthong
         fileName = sprintf('VocalTractOutput_%s_%s_%s.wav',Excitation,firstVowelString,secondVowelString);
     elseif plosive
-        fileName = sprintf('VocalTractOutput_%s_%s_plosive.wav',Excitation,firstVowelString);
+        fileName = sprintf('VocalTractOutput_%s_%s_plosive-%d.wav',Excitation,firstVowelString,PlosivePosition);
     else
         fileName = sprintf('VocalTractOutput_%s_%s.wav',Excitation,firstVowelString);
     end

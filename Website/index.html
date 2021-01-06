@@ -89,11 +89,16 @@
                     dipthongs can be produced between any two monothongs. This can produce some dipthongs that would
                     not naturally be produced by the human voice. The table below highlights all the monothongs
                     (vowels) the system can produce, the other table highlights dipthongs the system can produce
-                    with the two variables needed to make it sound. Clicking on the IPA representation will link to
-                    the examples further down the page.
+                    with the two variables needed to make it sound.
+                </p>
+                <p>
+                    <b>
+                        Clicking on the IPA representation will link to
+                        the examples further down the page.
+                    </b>
                 </p>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col">
                     <table class="table table-bordered">
                         <thead>
@@ -105,50 +110,50 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"> <a href="#">a:</a></th>
+                                <th scope="row"> <a href="#a">a:</a></th>
                                 <td>a</td>
                                 <td>bart/father</td>
                             </tr>
                             <tr>
-                                <th scope="row">&aelig;:</th>
+                                <th scope="row"><a href="#ae">&aelig;:</a></th>
                                 <td>ae</td>
                                 <td>bat/lad</td>
                             </tr>
                             <tr>
-                                <th scope="row">&epsilon;</th>
+                                <th scope="row"><a href="#bird">&epsilon;</a></th>
                                 <td>bird</td>
                                 <td>bird</td>
                             </tr>
                             <tr>
-                                <th scope="row">&#618;
+                                <th scope="row"> <a href="#I">&#618;</a>
                                 </th>
                                 <td>&#618;
                                 </td>
                                 <td>beet/see</td>
                             </tr>
                             <tr>
-                                <th scope="row">o</th>
+                                <th scope="row"> <a href="#o">o</a></th>
                                 <td>O</td>
                                 <td>ball/law</td>
                             </tr>
                             <tr>
-                                <th scope="row">&#629;</th>
+                                <th scope="row"> <a href="#q">&#629;</a></th>
                                 <td>Q</td>
                                 <td>bod/not</td>
                             </tr>
                             <tr>
-                                <th scope="row">u</th>
+                                <th scope="row"> <a href="#u">u</a></th>
                                 <td>u</td>
                                 <td>food/soon</td>
                             </tr>
                             <tr>
-                                <th scope="row">&#650;</th>
+                                <th scope="row"> <a href="#U">&#650;</a></th>
                                 </th>
                                 <td>U</td>
                                 <td>foot/put</td>
                             </tr>
                             <tr>
-                                <th scope="row">&#652;</th>
+                                <th scope="row"> <a href="#V">&#652;</a></th>
                                 <td>V</td>
                                 <td>but</td>
                             </tr>
@@ -169,20 +174,20 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"> <a href="#">a&#650;:</a></th>
+                                <th scope="row"> <a href="#au">a&#650;:</a></th>
                                 <td>a</td>
                                 <td>U</td>
                                 <td>now/cow</td>
                             </tr>
                             <tr>
-                                <th scope="row">a&#618; :</th>
+                                <th scope="row"><a href="#aI">a&#618;:</a></th>
                                 <td>ae</td>
                                 <td>&#618;
                                 </td>
                                 <td>high</td>
                             </tr>
                             <tr>
-                                <th scope="row">&epsilon;&#618;
+                                <th scope="row"><a href="#birdI">&epsilon;&#618;</a>
                                 </th>
                                 <td>bird</td>
                                 <td>&#618;
@@ -190,7 +195,7 @@
                                 <td>day</td>
                             </tr>
                             <tr>
-                                <th scope="row">o&#618;
+                                <th scope="row"><a href="#oI">o&#618;</a>
                                 </th>
                                 <td>o</td>
                                 <td>&#618;
@@ -212,7 +217,7 @@
                     excitement, below are the experiments with different types of noise, unit impulse and LFs. The
                     phomeme being synthesised is <b>a</b>.
                 </p>
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="table-responsive col-6">
                         <table class="table table-bordered align-middle text-center">
                             <thead>
@@ -284,7 +289,7 @@
                     remaining space. The mouth end is then updated with the value of the envelope multiplied by the
                     segment diameter.
                 </p>
-                <pre><code>
+                <pre class="border "><code>
                         % Plosive
                         plosiveDuration = round(nSamples/8);
                         plosiveEnv = linspace(0,1,plosiveDuration);
@@ -301,87 +306,123 @@
                         </code></pre>
                 <p>The table has audio examples of plosives at different positions, the excitation type was “LF” and the
                     vowel synthesised was &epsilon; (bird).</p>
-                <div class="table-responsive col-6">
+                <div class="row justify-content-center">
+                    <div class="table-responsive col-8">
 
-                    <table class="table table-bordered align-middle text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">Plosive Position</th>
-                                <th scope="col">Audio</th>
-                                <th scope="col">Output Graph</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0.00</td>
-                                <td><audio controls>
-                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-0.wav"
-                                            type="audio/wav">
-                                        Your browser does not support the audio element.
-                                    </audio></td>
-                                <td>
-                                    <img src="./assets/img/plosive-0-LF-bird.bmp" class="img-fluid"
-                                        alt="Graph of plosive at time 0">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.25</td>
-                                <td><audio controls>
-                                        <source
-                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-2.500000e-01.wav"
-                                            type="audio/wav">
-                                        Your browser does not support the audio element.
-                                    </audio></td>
-                                <td>
-                                    <img src="./assets/img/plosive-025-LF-bird.bmp" class="img-fluid"
-                                        alt="Graph of plosive at time 0.25">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.50</td>
-                                <td><audio controls>
-                                        <source
-                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-5.000000e-01.wav"
-                                            type="audio/wav">
-                                        Your browser does not support the audio element.
-                                    </audio></td>
-                                <td>
-                                    <img src="./assets/img/plosive-05-LF-bird.bmp" class="img-fluid"
-                                        alt="Graph of plosive at time 0.5">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.75</td>
-                                <td><audio controls>
-                                        <source
-                                            src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-7.500000e-01.wav"
-                                            type="audio/wav">
-                                        Your browser does not support the audio element.
-                                    </audio></td>
-                                <td>
-                                    <img src="./assets/img/plosive-075-LF-bird.bmp" class="img-fluid"
-                                        alt="Graph of plosive at time 0.75">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1.00</td>
-                                <td><audio controls>
-                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-1.wav"
-                                            type="audio/wav">
-                                        Your browser does not support the audio element.
-                                    </audio></td>
-                                <td>
-                                    <img src="./assets/img/plosive-1-LF-bird.bmp" class="img-fluid"
-                                        alt="Graph of plosive at time 1">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table table-bordered align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-5">Plosive Position</th>
+                                    <th scope="col" class="col-5">Audio</th>
+                                    <th scope="col">Output Graph</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0.00</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-0.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                    <td>
+                                        <a href="./assets/img/plosive-0-LF-bird.bmp" target="_blank">
+                                            <img src="./assets/img/plosive-0-LF-bird.bmp" class="img-fluid"
+                                                alt="Graph of plosive at time 0">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.25</td>
+                                    <td><audio controls>
+                                            <source
+                                                src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-2.500000e-01.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                    <td>
+                                        <a href="./assets/img/plosive-025-LF-bird.bmp" target="_blank">
+                                            <img src="./assets/img/plosive-025-LF-bird.bmp" class="img-fluid"
+                                                alt="Graph of plosive at time 0.25">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.50</td>
+                                    <td><audio controls>
+                                            <source
+                                                src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-5.000000e-01.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                    <td>
+                                        <a href="./assets/img/plosive-05-LF-bird.bmp" target="_blank">
+                                            <img src="./assets/img/plosive-05-LF-bird.bmp" class="img-fluid"
+                                                alt="Graph of plosive at time 0.5">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.75</td>
+                                    <td><audio controls>
+                                            <source
+                                                src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-7.500000e-01.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                    <td>
+                                        <a href="./assets/img/plosive-075-LF-bird.bmp" target="_blank">
+                                            <img src="./assets/img/plosive-075-LF-bird.bmp" class="img-fluid"
+                                                alt="Graph of plosive at time 0.75">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1.00</td>
+                                    <td><audio controls>
+                                            <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-1.wav"
+                                                type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio></td>
+                                    <td>
+                                        <a href="./assets/img/plosive-1-LF-bird.bmp" target="_blank">
+                                            <img src="./assets/img/plosive-1-LF-bird.bmp" class="img-fluid"
+                                                alt="Graph of plosive at time 1">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <p>
-                    Dipthongs
+                    After creating plosives and excitation, the next feature to look at was creating dipthongs. These
+                    are created by transitioning from one monothong to another mid-way through. The code allows the user
+                    to specify two monothongs, and transition between the two. This allows the user to create sounds
+                    that might not be normally produced.
                 </p>
+
+                <pre class="border"><code>
+                    % Dipthong transitions
+                    transition = linspace(0,1,nSamples);
+                    transition2 = 1 - transition;
+                    ...
+
+                    ...
+                    if dipthong
+                        % for when we're using dipthongs we need to move from one vowel to
+                        % the next over time
+                        for j=1:nSegments
+                            A(j) = transition2(n)*firstVowel(j) + transition(n)*secondVowel(j);
+                        end
+                    else
+                        % Select a vowel for synthesis
+                        for j=1:nSegments
+                            A(j) = firstVowel(j);
+                        end
+                    end
+                    </code></pre>
             </div>
 
 
@@ -390,7 +431,139 @@
         <div class="row">
             <div class="col">
                 <h4>Audio Examples</h4>
+                <div class="table-responsive">
+
+                    <table class="table table-bordered align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col" rowspan="2">Name</th>
+                                <th scope="col" colspan="3">Excitement Type (Bottom Row with Plosive)</th>
+
+                            </tr>
+                            <tr>
+                                <th scope="col">LF</th>
+                                <th scope="col">LF with Vibrato</th>
+                                <th scope="col">Noise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" id="a" rowspan="2">a</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="ae">&aelig;:</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_ae.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_ae.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_ae.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_ae_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_ae_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_ae_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="bird">&epsilon;</th>
+                                <td>bird</td>
+                                <td>bird</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="i">&#618;
+                                </th>
+                                <td>&#618;
+                                </td>
+                                <td>beet/see</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="o">o</th>
+                                <td>O</td>
+                                <td>ball/law</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="q">&#629;</th>
+                                <td>Q</td>
+                                <td>bod/not</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="u">u</th>
+                                <td>u</td>
+                                <td>food/soon</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="U">&#650;</th>
+                                </th>
+                                <td>U</td>
+                                <td>foot/put</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="V">&#652;</th>
+                                <td>V</td>
+                                <td>but</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div>
+            <a href="#CodeDesign">Back To Code Design</a>
         </div>
         <hr>
         <div class="row">

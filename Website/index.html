@@ -22,21 +22,74 @@
             <h4>Introduction and Background</h4>
 
             <div class="col">
-                <p>
-                    Voice synthesis is different from other types of synthesis, the voice is a very rich and expressive
-                    sound source, so this adds more challenges. Due to the rich variety of the voice, there are numerous
-                    ways to synthesise the voice, most models start by looking at the vocal tract as a 17cm tube with
-                    the lips and mouth at one end and the glottis at the other <i>(Figure 1)</i>.
-                </p>
-                <p>
-                    The vocal tract can be represented using the source-filter model where be glottis is the source, and
-                    the larynx and lips are the filters changing the way the sound is produced. Using the Kelly-Lochbaum
-                    vocal tract model we can split it up into multiple sections, each section has a specific area which
-                    changes relating on the vowel being produced <i>(Figure 2)</i>. We can then model the vocal tract as
-                    a
-                    series of standard digital waveguides. This idea was used in collaboration with Max Matthews in the
-                    first synthesis of singing voice on an IBM computer. The video below is the result <i>(Video 1)</i>.
-                </p>
+                <div class="row">
+                    <div class="col">
+
+                        <p>
+                            There are many different ways to synthesise sound, from adding sine tones together (additive
+                            synthesis) to using oscillators as ways to modulate the sound (FM synthesis). However, these
+                            methods
+                            have a few issues, namely that sound synthetic and lack the warm related to acoustic
+                            instruments
+                            and
+                            they’re harder to control [1].
+                        </p>
+                        <p>
+                            Physical modelling is different from these ways of synthesis, instead of focusing on sine
+                            waves,
+                            it
+                            models the system based on real-world equations. It produces a more natural sound, and
+                            allows
+                            the
+                            user to use more meaningful ways to define it. The method of physical modelling synthesis
+                            that
+                            will
+                            be used is digital waveguide (DWG) synthesis. This works by modelling wave propagations
+                            found in
+                            tubes or strings using multiple delay lines.
+                        </p>
+                        <p>
+                            Voice synthesis is different from other types of synthesis, the voice is a very rich and
+                            expressive
+                            sound source, so this adds more challenges. Due to the rich variety of the voice, there are
+                            numerous
+                            ways to synthesise the voice, most models start by looking at the vocal tract as a 17cm tube
+                            with
+                            the lips and mouth at one end and the glottis at the other <i>(Figure 1)</i>.
+                        </p>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="card">
+                            <video class="embed-responsive-item is_ready lazy-hidden" controls="controls" height="280"
+                                style="background-color: black; padding: 10px;"><br>
+                                <source src="./assets/vid/ness-digitalwaveguide.mp4"
+                                    data-src="./assets/vid/ness-digitalwaveguide.mp4" type="video/mp4"><br>
+                                Your browser does not support HTML5 video.
+                            </video>
+                            <div class="card-body">
+                                <i class="card-text"> Digital Waveguide from NESS Project [1]
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p>
+                        The vocal tract can be represented using the source-filter model where be glottis is the source,
+                        and the larynx and lips are the filters changing the way the sound is produced. Using the
+                        Kelly-Lochbaum vocal tract model we can split it up into multiple sections, each section has a
+                        specific area which changes relating to the vowel being produced <i>(Figure 2)</i>. We can then
+                        model
+                        the vocal tract as a series of standard digital waveguides. This idea was used in collaboration
+                        with Max Matthews in the first synthesis of singing voice on an IBM computer, it is now possible
+                        to use AI to create custom voices using software such as <a href="https://resemble.ai"
+                            target="_blank">resemble.ai</a> [2].
+                    </p>
+
+                </div>
                 <!-- Video and Figures-->
                 <div class="row my-auto justify-content-center">
                     <div class="col-6">
@@ -57,7 +110,7 @@
                         <div class="card">
                             <img src="./assets/img/vocalTract.png" class="img-fluid" alt="Vocal Tract">
                             <div class="card-body">
-                                <i class="card-text"> Figure 1 Vocal Tract [1]
+                                <i class="card-text"> Figure 1 - The Vocal Tract [3]
                                 </i>
                             </div>
                         </div>
@@ -67,30 +120,57 @@
                         <div class="card">
                             <img src="./assets/img/VocalTractArea.png" class="img-fluid" alt="Vocal Tract Area">
                             <div class="card-body">
-                                <i class="card-text"> Figure 2 Area of Vocal Tract, from the Glottis end [2]
+                                <i class="card-text"> Figure 2 - Area of Vocal Tract, from the Glottis end [4]
                                 </i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p>
-                    more
-                </p>
             </div>
         </div>
         <hr>
         <div class="row" id="CodeDesign">
             <div class="col">
                 <h4>Code Design</h4>
-                <p>
-                    The code is based on the digital waveguide vocal model and the work done in Labs. The code
-                    produces dipthongs, monothongs, plosives as well as allowing the use of noise, LF and LF with
-                    Vibrato as the excitation. Plosives can be inserted at any pint during the vowel production, and
-                    dipthongs can be produced between any two monothongs. This can produce some dipthongs that would
-                    not naturally be produced by the human voice. The table below highlights all the monothongs
-                    (vowels) the system can produce, the other table highlights dipthongs the system can produce
-                    with the two variables needed to make it sound.
-                </p>
+
+                <div class="row pb-2 justify-content-center">
+                    <div class="col">
+                        <p>
+                            The code is based on the digital waveguide vocal model and the work done in Labs. It is
+                            based of the
+                            work by Kelly Lochbaum, and implements the vocal tract as a series of cylindrical tubes with
+                            differing impedances, at the intersections between each tube it uses a Kelly Lochbaum
+                            scattering
+                            junction [5]. Figure 3 shows the 1D model and details how the area components (A) relate to
+                            the
+                            impedance (Z) with the scattering junctions (J) being between each section.
+                        </p>
+                        <p>
+                            The code produces diphthongs, monophthongs, plosives as well as allowing the use of noise,
+                            LF and LF
+                            with Vibrato as the excitation. Plosives can be inserted at any pint during the vowel
+                            production,
+                            and diphthongs can be produced between any two monophthongs. This can produce some
+                            diphthongs that
+                            would not naturally be produced by the human voice. The table below highlights all the
+                            monophthongs
+                            (vowels) the system can produce, the other table highlights diphthongs the system can
+                            produce with
+                            the two variables needed to make it sound.
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <img src="./assets/img/KL1DvocalTractModel.png" class="img-fluid" alt="Vocal Tract">
+                            <div class="card-body">
+                                <i class="card-text"> Figure 3 - Kelly Lochbaum 1D waveguide vocal tract model [5]
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <p>
                     <b>
                         Clicking on the IPA representation will link to
@@ -519,44 +599,397 @@
                                     </audio></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="bird">&epsilon;</th>
-                                <td>bird</td>
-                                <td>bird</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="i">&#618;
-                                </th>
-                                <td>&#618;
-                                </td>
-                                <td>beet/see</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="o">o</th>
-                                <td>O</td>
-                                <td>ball/law</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="q">&#629;</th>
-                                <td>Q</td>
-                                <td>bod/not</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="u">u</th>
-                                <td>u</td>
-                                <td>food/soon</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="U">&#650;</th>
-                                </th>
-                                <td>U</td>
-                                <td>foot/put</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" id="V">&#652;</th>
-                                <td>V</td>
-                                <td>but</td>
-                            </tr>
+                                <th scope="row" rowspan="2" id="bird">&epsilon;</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_bird.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_bird.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
 
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_bird_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_bird_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_bird_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="i">&#618;
+                                </th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_i.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_i.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_i.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_i_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_i_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_i_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="o">o</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_o.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_o.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_o.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_o_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_o_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_o_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="q">&#629;</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_Q.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_Q.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_Q.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_Q_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_Q_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_Q_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="u">u</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_u.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_u.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_u.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_u_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_u_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_u_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="U">&#650;</th>
+                                </th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_U2.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_U2.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_U2.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_U2_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_U2_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_U2_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan="2" id="V">&#652;</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_V.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_V.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_V.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_V_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_V_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_V_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th colspan="4">Diphthongs</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="a" rowspan="2">a</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="a" rowspan="2">a</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="a" rowspan="2">a</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="a" rowspan="2">a</th>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+
+                            </tr>
+                            <tr>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LF_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_LFVib_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                                <td><audio controls>
+                                        <source src="./assets/AudioExamples/VocalTractOutput_Noise_a_plosive-0.wav"
+                                            type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -570,7 +1003,11 @@
             <div class="col">
                 <h4>Anaylsis</h4>
                 <div class="row">
+                    <p></p>
+                </div>
+                <div class="row">
                     <h5>Formant Anaylsis in Praat</h5>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -579,9 +1016,9 @@
             <div class="col">
                 <h4>Evaluation and Further Development</h4>
                 <p>
-
                 </p>
-                <h6>Word Count : 602</h6>
+                
+                <h6>Word Count : 922</h6>
             </div>
         </div>
         <hr>
@@ -591,15 +1028,32 @@
                 <div class="row">
                     <ul class="list-unstyled">
                         <li>
-                            [1] Loy, G., & Chowning, J. (2007). Sound Synthesis. In Musimathics, Volume 2: The
-                            Mathematical Foundations of Music (pp. 363-452). Cambridge, Massachusetts; London,
-                            England:
-                            The MIT Press. doi:10.2307/j.ctt5hhm8g.14
+                            [1] "The Project - NESS", NESS, 2021. [Online]. Available:
+                            <a href="https://www.ness.music.ed.ac.uk/project"
+                                target="_blank">https://www.ness.music.ed.ac.uk/project</a>.
                         </li>
                         <li>
-                            [2] B. Story and I. Titze, "Parameterization of vocal tract area functions by empirical
+                            [2] "AI Generated Voices ~ Resemble AI", Resemble AI, 2021. [Online]. Available:
+                            <a href="https://www.resemble.ai/" target="_blank">https://www.resemble.ai/</a>.
+                        </li>
+                        <li>
+                            [3] Loy, G., & Chowning, J. (2007). Sound Synthesis. In Musimathics, Volume 2: The
+                            Mathematical Foundations of Music (pp. 363-452). Cambridge, Massachusetts; London,
+                            England:
+                            The MIT Press.
+                        </li>
+                        <li>
+                            [4] B. Story and I. Titze, "Parameterization of vocal tract area functions by empirical
                             orthogonal modes", Journal of Phonetics, vol. 26, no. 3, pp. 223-260, 1998. Available:
-                            10.1006/jpho.1998.0076
+                            <a href="https://doi.org/10.1006/jpho.1998.0076"
+                                target="_blank">doi:10.1006/jpho.1998.0076</a>
+                        </li>
+                        <li>
+                            [5] J. Mullen, D. Howard and D. Murphy, "Waveguide physical modeling of vocal tract
+                            acoustics: flexible formant bandwidth control from increased model dimensionality", IEEE
+                            Transactions on Audio, Speech and Language Processing, vol. 14, no. 3, pp. 964-971, 2006.
+                            Available: <a href="https://doi.org/10.1109/tsa.2005.858052"
+                                target="_blank">10.1109/tsa.2005.858052</a>
                         </li>
                     </ul>
                 </div>

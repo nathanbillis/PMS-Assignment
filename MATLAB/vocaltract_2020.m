@@ -11,7 +11,7 @@
 % 223-260, https://doi.org/10.1006/jpho.1998.0076.
 %
 % Adapted by DTM for LF excitation, Sound Output, Dynamics, Oct 2020
-% Adapted by INSERTNAME 
+% Adapted by INSERTNAME
 % for fufliment of Physical Modelling Synthesis, Dec 2020
 % -----------------------------------------------------------------------
 
@@ -210,10 +210,10 @@ if graphs
     plot(Pout);
     xlabel('time (samples)');
     ylabel('Amplitude');
-
+    
     fftSize = 2^16;
     f = (0:fftSize-1)*(Fs/fftSize);
-
+    
     figure(2);
     clf;
     plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));

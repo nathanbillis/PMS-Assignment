@@ -11,7 +11,7 @@
 % 223-260, https://doi.org/10.1006/jpho.1998.0076.
 %
 % Adapted by DTM for LF excitation, Sound Output, Dynamics, Oct 2020
-% Adapted by Y3859177
+% Adapted by INSERTNAME
 % for fufliment of Physical Modelling Synthesis, Dec 2020
 % -----------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ saveFile = true;
 graphs = false;
 
 % Add a plositve "b" sound | true or false
-plosive = false;
+plosive = true;
 
 % Position to start plosive 0.0 = start| 0.5 = middle | 1 = end
 PlosivePosition = 0.0;
@@ -58,7 +58,7 @@ Excitation = "LF";
 % U2    | foot/put
 % V     | but
 
-firstVowelString =  "bird";
+firstVowelString =  "a";
 
 % if using two vowels for a dipthong set to true and select the second
 % vowel
@@ -72,7 +72,7 @@ firstVowelString =  "bird";
 % ===========================
 
 dipthong = true; % true or false
-secondVowelString = "ae";
+secondVowelString = "I";
 
 %------------------- MAIN PROGRAM ------------
 
@@ -218,9 +218,6 @@ if graphs
     clf;
     plot(f,20*log10(abs(fft(Pout,fftSize))/max(abs(fft(Pout,fftSize)))));
     axis([0 5000 -100 0]);
-%     xline(270,'r'); %F1
-%     xline(2290,'r'); %F2
-
     grid on;
     xlabel('Frequency (Hz)');
     ylabel('Magnitude Response (dB)');

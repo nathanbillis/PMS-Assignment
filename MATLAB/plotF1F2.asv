@@ -2,7 +2,6 @@
 % and H. L. Barney, “Control methods used in a study of the vowels,”
 % Journal of the Acoustical Society of America, vol. 24, no. 2, pp.
 % 175-184, March 1952.
-% Written by Y3859177
 
 dataset = "Men";
 
@@ -66,10 +65,10 @@ text(ae(2)-10, ae(1)-10, "ae");
 text(a(2)-10, a(1)-10, "a");
 text(u(2)-10, u(1)-10, "u");
 
-plot([2500,2000],[200,800],'b');
-plot([750,2000],[800,800],'b');
-plot([750,750],[800,200]),'b';
-plot([750,2500],[200,200],'b');
+plot([2500,2000],[200,800]);
+plot([750,2000],[800,800]);
+plot([550,550],[800,200]);
+plot([550,2500],[200,200]);
 
 
 

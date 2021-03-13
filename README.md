@@ -1,4 +1,6 @@
 # ELE00102M :: Physical Modelling Synthesis 2020/21
+https://nathanbillis.github.io/PMS-Assignment
+
 Final Mark for Assessment: 81 %
 ## Coursework Assessment infomation: 
 You  have  been  asked  to  prepare  a  set  of  sound  design  examples  based  on  a Physics  Inspired  or Spectral  sound  synthesis  model.  The  results  are  to  be  presented  online  in  a  website  article  that demonstrates your sound design and sound modelling skills. You are required to submit the following: 
